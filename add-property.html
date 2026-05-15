@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Property — NestFinder</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🏠</text></svg>" />
+</head>
+
+<body data-page="add">
+  <!-- ░░ SPINNER ░░ -->
+  <div class="spinner-overlay" id="spinner">
+    <div class="spinner"></div>
+    <span class="spinner-text">Submitting property…</span>
+  </div>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🏠</div>
+        NestFinder
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="listings.html" class="nav-link">Properties</a></li>
+        <li><a href="search-results.html" class="nav-link">Search</a></li>
+        <li><a href="add-property.html" class="nav-link">List Property</a></li>
+        <li><a href="saved.html" class="nav-link" id="navSavedLink">❤️ Saved</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="navLoginBtn" class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+        <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="listings.html" class="nav-link">Properties</a>
+    <a href="search-results.html" class="nav-link">Search</a>
+    <a href="add-property.html" class="nav-link">List Property</a>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+      <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+    </div>
+  </div>
+
+  <!-- ░░ ADD PROPERTY ░░ -->
+  <div class="add-page">
+    <div class="container">
+
+      <!-- Page Intro -->
+      <div style="text-align:center;margin-bottom:36px" class="fade-in">
+        <div
+          style="display:inline-flex;align-items:center;gap:8px;background:var(--blue-50);color:var(--blue-600);border:1px solid var(--blue-100);border-radius:99px;padding:5px 16px;font-size:13px;font-weight:600;margin-bottom:14px">
+          🏠 Free to List
+        </div>
+        <h1
+          style="font-family:var(--font-display);font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--slate-900);letter-spacing:-.02em">
+          List Your Property</h1>
+        <p style="font-size:15px;color:var(--slate-500);margin-top:8px;max-width:480px;margin-inline:auto">Reach
+          thousands of students actively searching for housing near their college.</p>
+      </div>
+
+      <div class="form-card fade-in delay-1">
+        <h2 class="form-title">Property Details</h2>
+        <p class="form-sub">Fill in the details below. Use AI to auto-generate a description.</p>
+
+        <form id="addForm" novalidate>
+
+          <!-- Title -->
+          <div class="form-group">
+            <label class="form-label" for="propTitle">Property Title <span class="req">*</span></label>
+            <input class="form-control" id="propTitle" type="text" placeholder="e.g. Cozy 1BHK near Delhi University"
+              maxlength="80" />
+          </div>
+
+          <!-- Rent + City -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="propRent">Monthly Rent (₹) <span class="req">*</span></label>
+              <input class="form-control" id="propRent" type="number" placeholder="e.g. 8000" min="1000" max="100000" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="propCity">City <span class="req">*</span></label>
+              <input class="form-control" id="propCity" type="text" placeholder="e.g. Bangalore" />
+            </div>
+          </div>
+
+          <!-- Type + Gender -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="propType">Room Type <span class="req">*</span></label>
+              <select class="form-control" id="propType">
+                <option value="">Select Type</option>
+                <option value="PG">PG (Paying Guest)</option>
+                <option value="Hostel">Hostel</option>
+                <option value="Studio">Studio Apartment</option>
+                <option value="1BHK">1 BHK</option>
+                <option value="2BHK">2 BHK</option>
+                <option value="Shared">Shared Flat</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="propGender">Suitable For</label>
+              <select class="form-control" id="propGender">
+                <option value="Any">Any Gender</option>
+                <option value="Boys">Boys Only</option>
+                <option value="Girls">Girls Only</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Amenities -->
+          <div class="form-group">
+            <label class="form-label">Amenities</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="WiFi" style="accent-color:var(--blue-600)"> 📶 WiFi</label>
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="AC" style="accent-color:var(--blue-600)"> ❄️ AC</label>
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="Meals" style="accent-color:var(--blue-600)"> 🍽️ Meals</label>
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="Laundry" style="accent-color:var(--blue-600)"> 🧺
+                Laundry</label>
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="Security" style="accent-color:var(--blue-600)"> 🔒
+                Security</label>
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="Parking" style="accent-color:var(--blue-600)"> 🅿️
+                Parking</label>
+              <label
+                style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;background:var(--slate-50);border:1.5px solid var(--slate-200);padding:6px 12px;border-radius:var(--radius-sm)"><input
+                  type="checkbox" name="amenity" value="Gym" style="accent-color:var(--blue-600)"> 🏋️ Gym</label>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label class="form-label" for="propDesc">Description</label>
+            <textarea class="form-control" id="propDesc"
+              placeholder="Describe your property — location, nearby colleges, special features…"
+              style="min-height:130px"></textarea>
+          </div>
+
+          <!-- Owner Contact -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="propName">Your Name</label>
+              <input class="form-control" id="propName" type="text" placeholder="Full name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="propPhone">Phone Number</label>
+              <input class="form-control" id="propPhone" type="tel" placeholder="+91 98765 43210" />
+            </div>
+          </div>
+
+          <!-- Image Upload -->
+          <div class="form-group">
+            <label class="form-label">Property Images</label>
+            <div class="upload-zone" id="uploadZone">
+              <div class="icon">📷</div>
+              <p><strong>Click to upload</strong> or drag & drop photos here</p>
+              <p style="font-size:12px;margin-top:4px;color:var(--slate-400)">PNG, JPG up to 5 MB each · Max 10 photos
+              </p>
+              <input type="file" id="imgInput" accept="image/*" multiple />
+            </div>
+            <div id="uploadPreview"></div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <div class="ai-btn-wrap">
+              <button type="button" id="generateAI" class="btn btn-outline">
+                ✨ Generate AI Description
+              </button>
+              <span class="ai-badge">AI</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">🚀 Submit Property</button>
+            <a href="listings.html" class="btn btn-ghost">Cancel</a>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Tips Box -->
+      <div
+        style="max-width:760px;margin:24px auto 0;background:var(--blue-50);border:1px solid var(--blue-100);border-radius:var(--radius-md);padding:18px 22px"
+        class="fade-in delay-2">
+        <h4
+          style="font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--blue-700);margin-bottom:8px">
+          💡 Tips for a great listing</h4>
+        <ul
+          style="font-size:13px;color:var(--blue-700);display:flex;flex-direction:column;gap:4px;list-style:disc;padding-left:16px">
+          <li>Add clear, well-lit photos of every room</li>
+          <li>Mention the nearest college or metro station</li>
+          <li>Be specific about what's included in the rent</li>
+          <li>Respond quickly to student inquiries — faster responses get more bookings</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon" style="background:rgba(255,255,255,.15)">🏠</div>NestFinder
+          </div>
+          <p>India's most trusted platform for student housing.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listings.html">Properties</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cities</h4>
+          <ul>
+            <li><a href="search-results.html?city=Delhi">Delhi</a></li>
+            <li><a href="search-results.html?city=Mumbai">Mumbai</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nestfinder.in">📧 hello@nestfinder.in</a></li>
+            <li><a href="tel:+911800123456">📞 1800-123-456</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 NestFinder</span>
+        <span>Privacy · Terms</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

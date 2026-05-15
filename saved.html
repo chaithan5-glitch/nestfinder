@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Properties — NestFinder</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🏠</text></svg>" />
+</head>
+
+<body data-page="saved">
+
+  <!-- SPINNER -->
+  <div class="spinner-overlay" id="spinner">
+    <div class="spinner"></div>
+    <span class="spinner-text">Loading…</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🏠</div>
+        NestFinder
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="listings.html" class="nav-link">Properties</a></li>
+        <li><a href="search-results.html" class="nav-link">Search</a></li>
+        <li><a href="saved.html" class="nav-link active">❤️ Saved</a></li>
+        <li><a href="add-property.html" class="nav-link">List Property</a></li>
+      </ul>
+      <div class="nav-actions" id="navActions">
+        <button class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+        <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="listings.html" class="nav-link">Properties</a>
+    <a href="search-results.html" class="nav-link">Search</a>
+    <a href="saved.html" class="nav-link">❤️ Saved</a>
+    <a href="add-property.html" class="nav-link">List Property</a>
+    <div class="nav-actions">
+      <button id="navLoginBtn" class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+      <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+    </div>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="listings-header">
+    <div class="container">
+      <h1 class="listings-title">❤️ Saved Properties</h1>
+      <p class="listings-sub" id="savedSubtitle">Your shortlisted rooms — all in one place.</p>
+    </div>
+  </div>
+
+  <!-- SAVED BODY -->
+  <div class="listings-body">
+    <div class="container">
+
+      <!-- TOOLBAR -->
+      <div class="listings-toolbar" style="margin-bottom:24px">
+        <p class="result-count" id="savedCount"></p>
+        <button class="btn btn-ghost btn-sm" id="clearAllBtn" onclick="clearAllSaved()"
+          style="color:var(--error);border-color:var(--error);display:none">
+          🗑️ Clear All
+        </button>
+      </div>
+
+      <!-- CARDS GRID -->
+      <div class="cards-grid" id="savedGrid">
+        <!-- Populated by app.js -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon" style="background:rgba(255,255,255,.15)">🏠</div>
+            NestFinder
+          </div>
+          <p>India's most trusted platform for student housing.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listings.html">All Properties</a></li>
+            <li><a href="saved.html">Saved Properties</a></li>
+            <li><a href="add-property.html">List Property</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Cities</h4>
+          <ul>
+            <li><a href="search-results.html?city=Delhi">Delhi</a></li>
+            <li><a href="search-results.html?city=Mumbai">Mumbai</a></li>
+            <li><a href="search-results.html?city=Bangalore">Bangalore</a></li>
+            <li><a href="search-results.html?city=Pune">Pune</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul>
+            <li><a href="mailto:hello@nestfinder.in">📧 hello@nestfinder.in</a></li>
+            <li><a href="#">📍 Bangalore, India</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 NestFinder. Made with ❤️ for students.</span>
+        <span>Privacy Policy · Terms of Use</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUTH MODAL (same as other pages) -->
+  <div class="auth-overlay" id="authOverlay" role="dialog" aria-modal="true">
+    <div class="auth-modal" id="authModal">
+      <div class="auth-header">
+        <button class="auth-close" id="authClose" aria-label="Close">✕</button>
+        <div class="auth-header-icon" id="authHeaderIcon">🏠</div>
+        <h2 id="authHeaderTitle">Welcome back</h2>
+        <p id="authHeaderSub">Sign in to your NestFinder account</p>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabSignin" onclick="switchTab('signin')">Sign In</button>
+        <button class="auth-tab" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+      <div class="auth-body">
+        <div class="auth-panel active" id="panelSignin">
+          <form id="signinForm" novalidate>
+            <div class="auth-group">
+              <label class="auth-label" for="siEmail">Email address</label>
+              <div class="auth-input-wrap">
+                <span class="input-icon">📧</span>
+                <input class="auth-input" type="email" id="siEmail" placeholder="you@university.edu" required />
+              </div>
+            </div>
+            <div class="auth-group">
+              <label class="auth-label" for="siPassword">Password</label>
+              <div class="auth-input-wrap">
+                <span class="input-icon">🔒</span>
+                <input class="auth-input has-toggle" type="password" id="siPassword" placeholder="Your password"
+                  required />
+                <button type="button" class="toggle-pw" onclick="togglePassword('siPassword',this)"
+                  tabindex="-1">👁️</button>
+              </div>
+            </div>
+            <button type="submit" class="auth-submit" id="signinBtn">🚀 Sign In</button>
+          </form>
+          <div class="auth-switch">Don't have an account? <button onclick="switchTab('signup')">Sign up free</button>
+          </div>
+        </div>
+        <div class="auth-panel" id="panelSignup">
+          <form id="signupForm" novalidate>
+            <div class="auth-name-row">
+              <div class="auth-group">
+                <label class="auth-label" for="suFirst">First name</label>
+                <div class="auth-input-wrap">
+                  <span class="input-icon">👤</span>
+                  <input class="auth-input" type="text" id="suFirst" placeholder="Rahul" required />
+                </div>
+              </div>
+              <div class="auth-group">
+                <label class="auth-label" for="suLast">Last name</label>
+                <div class="auth-input-wrap">
+                  <span class="input-icon">👤</span>
+                  <input class="auth-input" type="text" id="suLast" placeholder="Sharma" required />
+                </div>
+              </div>
+            </div>
+            <div class="auth-group">
+              <label class="auth-label" for="suEmail">Email</label>
+              <div class="auth-input-wrap">
+                <span class="input-icon">📧</span>
+                <input class="auth-input" type="email" id="suEmail" placeholder="rahul@college.edu" required />
+              </div>
+            </div>
+            <div class="auth-group">
+              <label class="auth-label" for="suPassword">Password</label>
+              <div class="auth-input-wrap">
+                <span class="input-icon">🔒</span>
+                <input class="auth-input has-toggle" type="password" id="suPassword" placeholder="Min. 8 characters"
+                  required oninput="checkPwStrength(this.value)" />
+                <button type="button" class="toggle-pw" onclick="togglePassword('suPassword',this)"
+                  tabindex="-1">👁️</button>
+              </div>
+              <div class="pw-strength">
+                <div class="pw-strength-bar">
+                  <div class="pw-strength-fill" id="pwFill"></div>
+                </div>
+                <div class="pw-strength-label" id="pwLabel">Enter a password</div>
+              </div>
+            </div>
+            <button type="submit" class="auth-submit" id="signupBtn">🎓 Create Free Account</button>
+          </form>
+          <div class="auth-switch">Already have an account? <button onclick="switchTab('signin')">Sign in</button>
+          </div>
+        </div>
+        <div class="auth-panel" id="panelForgot">
+          <button class="auth-back-btn" onclick="switchTab('signin')">← Back to Sign In</button>
+          <form id="forgotForm" novalidate>
+            <div class="auth-group">
+              <label class="auth-label" for="fpEmail">Your email address</label>
+              <div class="auth-input-wrap">
+                <span class="input-icon">📧</span>
+                <input class="auth-input" type="email" id="fpEmail" placeholder="you@university.edu" required />
+              </div>
+            </div>
+            <button type="submit" class="auth-submit" id="forgotBtn">✉️ Send Reset Link</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

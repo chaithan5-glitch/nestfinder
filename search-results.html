@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Results — NestFinder</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🏠</text></svg>" />
+</head>
+
+<body data-page="search">
+
+  <!-- ░░ SPINNER ░░ -->
+  <div class="spinner-overlay" id="spinner">
+    <div class="spinner"></div>
+    <span class="spinner-text">Searching…</span>
+  </div>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🏠</div>
+        NestFinder
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="listings.html" class="nav-link">Properties</a></li>
+        <li><a href="search-results.html" class="nav-link">Search</a></li>
+        <li><a href="add-property.html" class="nav-link">List Property</a></li>
+        <li><a href="saved.html" class="nav-link" id="navSavedLink">❤️ Saved</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="navLoginBtn" class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+        <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="listings.html" class="nav-link">Properties</a>
+    <a href="search-results.html" class="nav-link">Search</a>
+    <a href="add-property.html" class="nav-link">List Property</a>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+      <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+    </div>
+  </div>
+
+  <!-- ░░ SEARCH HERO ░░ -->
+  <div class="search-page">
+    <div class="search-hero">
+      <div class="container">
+        <div class="breadcrumb fade-in">
+          <a href="index.html">Home</a><span>›</span>
+          <span>Search Results</span>
+        </div>
+        <h1 class="fade-in delay-1">Showing properties in <em id="searchCityLabel">…</em></h1>
+        <p class="meta fade-in delay-1" id="searchCount">Loading…</p>
+
+        <!-- Inline re-search -->
+        <form class="inline-search fade-in delay-2" id="inlineSearch" style="margin-top:20px;max-width:460px">
+          <input name="q" type="text" placeholder="Search another city…" />
+          <button type="submit" class="btn btn-primary btn-sm">🔍 Search</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Results Grid ── -->
+    <div class="search-layout">
+      <div class="container">
+
+        <!-- Active Filters Display -->
+        <div id="activeFilters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="cards-grid" id="searchGrid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░ EXPLORE MORE ░░ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Explore Other Cities</h2>
+          <p class="section-sub">Students are searching these cities right now</p>
+        </div>
+      </div>
+      <div class="city-pills">
+        <a href="search-results.html?city=Delhi" class="city-pill">🏛️ Delhi</a>
+        <a href="search-results.html?city=Mumbai" class="city-pill">🌊 Mumbai</a>
+        <a href="search-results.html?city=Bangalore" class="city-pill">💻 Bangalore</a>
+        <a href="search-results.html?city=Pune" class="city-pill">🎓 Pune</a>
+        <a href="search-results.html?city=Hyderabad" class="city-pill">💎 Hyderabad</a>
+        <a href="search-results.html?city=Chennai" class="city-pill">🌴 Chennai</a>
+        <a href="search-results.html?city=Kolkata" class="city-pill">🎨 Kolkata</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon" style="background:rgba(255,255,255,.15)">🏠</div>NestFinder
+          </div>
+          <p>India's most trusted platform for student housing.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listings.html">Properties</a></li>
+            <li><a href="add-property.html">List Property</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cities</h4>
+          <ul>
+            <li><a href="search-results.html?city=Delhi">Delhi</a></li>
+            <li><a href="search-results.html?city=Mumbai">Mumbai</a></li>
+            <li><a href="search-results.html?city=Bangalore">Bangalore</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nestfinder.in">📧 hello@nestfinder.in</a></li>
+            <li><a href="tel:+911800123456">📞 1800-123-456</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 NestFinder</span>
+        <span>Privacy · Terms</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Show active filter chips
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const chips = document.getElementById('activeFilters');
+      if (!chips) return;
+      params.forEach((val, key) => {
+        if (!val) return;
+        const labels = { city: '📍 City', budget: '💸 Max Budget' };
+        const chip = document.createElement('span');
+        chip.className = 'badge badge-blue';
+        chip.style.cssText = 'font-size:13px;padding:5px 12px;gap:6px';
+        chip.innerHTML = `${labels[key] || key}: <strong>${key === 'budget' ? '₹' + Number(val).toLocaleString() : val}</strong>
+        <button onclick="removeFilter('${key}')" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--terra);margin-left:2px">×</button>`;
+        chips.appendChild(chip);
+      });
+    });
+
+    window.removeFilter = function (key) {
+      const params = new URLSearchParams(window.location.search);
+      params.delete(key);
+      window.location.search = params.toString();
+    };
+  </script>
+</body>
+
+</html>

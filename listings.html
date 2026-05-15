@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Properties — NestFinder</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🏠</text></svg>" />
+</head>
+
+<body data-page="listings">
+
+  <!-- ░░ SPINNER ░░ -->
+  <div class="spinner-overlay" id="spinner">
+    <div class="spinner"></div>
+    <span class="spinner-text">Loading…</span>
+  </div>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🏠</div>
+        NestFinder
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="listings.html" class="nav-link">Properties</a></li>
+        <li><a href="search-results.html" class="nav-link">Search</a></li>
+        <li><a href="add-property.html" class="nav-link">List Property</a></li>
+        <li><a href="saved.html" class="nav-link" id="navSavedLink">❤️ Saved</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="navLoginBtn" class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+        <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="listings.html" class="nav-link">Properties</a>
+    <a href="search-results.html" class="nav-link">Search</a>
+    <a href="add-property.html" class="nav-link">List Property</a>
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" onclick="openAuth('signin')">Sign In</button>
+      <a href="add-property.html" class="btn btn-primary btn-sm">+ Add Property</a>
+    </div>
+  </div>
+
+  <!-- ░░ PAGE HEADER ░░ -->
+  <div class="listings-header">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <h1>All Properties</h1>
+          <p class="meta">Verified student accommodation across India</p>
+        </div>
+        <button id="filterToggle" class="btn btn-outline btn-sm" style="display:none">🔧 Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░ MAIN LAYOUT ░░ -->
+  <div class="container">
+    <div class="listings-layout">
+
+      <!-- ── Sidebar Filters ── -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">🔧 Filters</div>
+
+        <div class="filter-group">
+          <div class="filter-label">City</div>
+          <input class="filter-input" id="fCity" type="text" placeholder="e.g. Delhi, Pune…" />
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Budget (₹ / month)</div>
+          <div class="range-wrap">
+            <input class="filter-input" id="fMin" type="number" placeholder="Min" min="0" />
+            <input class="filter-input" id="fMax" type="number" placeholder="Max" min="0" />
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Room Type</div>
+          <div class="filter-chips">
+            <label class="filter-chip"><input type="checkbox" class="type-check" value="PG" /> PG</label>
+            <label class="filter-chip"><input type="checkbox" class="type-check" value="Hostel" /> Hostel</label>
+            <label class="filter-chip"><input type="checkbox" class="type-check" value="Studio" /> Studio</label>
+            <label class="filter-chip"><input type="checkbox" class="type-check" value="1BHK" /> 1BHK</label>
+            <label class="filter-chip"><input type="checkbox" class="type-check" value="2BHK" /> 2BHK</label>
+            <label class="filter-chip"><input type="checkbox" class="type-check" value="Shared" /> Shared Flat</label>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button id="applyFilters" class="btn btn-primary btn-sm" style="flex:1">Apply</button>
+          <button id="clearFilters" class="btn btn-ghost btn-sm" style="flex:1">Clear</button>
+        </div>
+      </aside>
+
+      <!-- ── Listings Area ── -->
+      <main>
+        <div class="listings-toolbar">
+          <span class="result-count" id="resultCount">Loading…</span>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">Sort: Default</option>
+            <option value="low">Rent: Low to High</option>
+            <option value="high">Rent: High to Low</option>
+            <option value="rating">Highest Rated</option>
+          </select>
+          <a href="add-property.html" class="btn btn-outline btn-sm">+ List Yours</a>
+        </div>
+
+        <div class="cards-grid" id="listingsGrid">
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon" style="background:rgba(255,255,255,.15)">🏠</div>NestFinder
+          </div>
+          <p>India's most trusted platform for student housing.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listings.html">Properties</a></li>
+            <li><a href="add-property.html">List Property</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cities</h4>
+          <ul>
+            <li><a href="search-results.html?city=Delhi">Delhi</a></li>
+            <li><a href="search-results.html?city=Mumbai">Mumbai</a></li>
+            <li><a href="search-results.html?city=Bangalore">Bangalore</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@nestfinder.in">📧 hello@nestfinder.in</a></li>
+            <li><a href="tel:+911800123456">📞 1800-123-456</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 NestFinder</span>
+        <span>Privacy · Terms</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Show filter toggle on mobile
+    if (window.innerWidth < 900) {
+      document.getElementById('filterToggle').style.display = 'inline-flex';
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>
