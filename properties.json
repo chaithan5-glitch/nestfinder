@@ -1,0 +1,180 @@
+[
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e6a"
+    },
+    "title": "Cozy Studio near Delhi University",
+    "rent": 7500,
+    "city": "Delhi",
+    "type": "Studio",
+    "description": "Fully furnished studio with high-speed WiFi, 24/7 security, and 5-minute walk to North Campus.",
+    "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e6b"
+    },
+    "title": "Shared 2BHK — Powai, Mumbai",
+    "rent": 12000,
+    "city": "Mumbai",
+    "type": "Shared",
+    "description": "Spacious shared flat near IIT Bombay with attached washroom, modular kitchen, and gym access.",
+    "image": "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e6c"
+    },
+    "title": "1BHK Apartment — Koramangala",
+    "rent": 14000,
+    "city": "Bangalore",
+    "type": "1BHK",
+    "description": "Modern 1BHK with power backup, metro connectivity, and walking distance to tech parks.",
+    "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e6d"
+    },
+    "title": "PG for Girls — Connaught Place",
+    "rent": 8000,
+    "city": "Delhi",
+    "type": "PG",
+    "description": "Girls-only PG with meals included, nearby metro station, and strict security protocols.",
+    "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e6e"
+    },
+    "title": "Hostel Room — Banjara Hills",
+    "rent": 5500,
+    "city": "Hyderabad",
+    "type": "Hostel",
+    "description": "Budget-friendly hostel room with study area, rooftop terrace, and monthly cleaning service.",
+    "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e6f"
+    },
+    "title": "2BHK near Pune University",
+    "rent": 10500,
+    "city": "Pune",
+    "type": "2BHK",
+    "description": "Well-maintained 2BHK with separate study room, terrace access, and bus stop nearby.",
+    "image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e70"
+    },
+    "title": "Studio Flat — Salt Lake, Kolkata",
+    "rent": 7000,
+    "city": "Kolkata",
+    "type": "Studio",
+    "description": "Compact studio near Jadavpur University with modular kitchen and 24-hour water supply.",
+    "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69fef59e4913ca72cbff5e71"
+    },
+    "title": "Shared PG — Anna Nagar, Chennai",
+    "rent": 6000,
+    "city": "Chennai",
+    "type": "PG",
+    "description": "Mixed PG with meals, housekeeping, and direct bus to colleges.",
+    "image": "https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?w=600&q=80",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a017e0508abe00682fcc3be"
+    },
+    "title": "Test PG near Mumbai University",
+    "rent": 6000,
+    "city": "mumbai",
+    "type": "PG",
+    "description": "Welcome to Test PG near Mumbai University! Situated in mumbai, this PG offers the perfect blend of comfort and convenience. Enjoy proximity to universities, shopping areas, and public transport, all while living in a fully-equipped, student-friendly environment.",
+    "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80",
+    "amenities": [
+      "WiFi",
+      "Parking",
+      "Gym"
+    ],
+    "gender": "Any",
+    "ownerName": "",
+    "ownerPhone": "",
+    "rating": 4,
+    "createdAt": {
+      "$date": "2026-05-11T06:58:13.623Z"
+    },
+    "updatedAt": {
+      "$date": "2026-05-11T06:58:13.623Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a040af70aeab0ed1c259620"
+    },
+    "title": "2bhk near mumbai Thane",
+    "rent": 7000,
+    "city": "mumbai",
+    "type": "2BHK",
+    "description": "Welcome to 2bhk near mumbai Thane! Situated in mumbai, this 2BHK offers the perfect blend of comfort and convenience. Enjoy proximity to universities, shopping areas, and public transport.",
+    "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80",
+    "amenities": [
+      "AC",
+      "Security",
+      "Parking",
+      "Gym"
+    ],
+    "gender": "Any",
+    "ownerName": "shiva",
+    "ownerPhone": "5321686568",
+    "rating": 4,
+    "createdAt": {
+      "$date": "2026-05-13T05:24:07.597Z"
+    },
+    "updatedAt": {
+      "$date": "2026-05-13T05:24:07.597Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6a04112d71df936d935d6df7"
+    },
+    "title": "pg near bangalore",
+    "rent": 6500,
+    "city": "bangalore",
+    "type": "PG",
+    "description": "Welcome to pg near bangalore! Situated in bangalore, this PG offers the perfect blend of comfort and convenience. Enjoy proximity to universities, shopping areas, and public transport.",
+    "image": "data:image/jpeg;base64,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",
+    "amenities": [
+      "WiFi",
+      "Meals",
+      "Gym"
+    ],
+    "gender": "Any",
+    "ownerName": "chaithra",
+    "ownerPhone": "7953523565",
+    "rating": 4,
+    "createdAt": {
+      "$date": "2026-05-13T05:50:37.384Z"
+    },
+    "updatedAt": {
+      "$date": "2026-05-13T05:50:37.384Z"
+    },
+    "__v": 0
+  }
+]
