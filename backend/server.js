@@ -1,4 +1,6 @@
 require('dotenv').config();
+process.env.EMAIL_USER = process.env.EMAIL_USER || "chaithanshivakumar5@gmail.com";
+process.env.EMAIL_PASS = process.env.EMAIL_PASS || "cwefzkcacjjxdacx";
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
