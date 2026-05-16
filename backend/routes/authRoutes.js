@@ -88,10 +88,6 @@ router.post("/forgot-password", async (req, res) => {
             }
         });
 
-        // Verify transporter
-        await transporter.verify();
-        console.log("✅ Transporter verified");
-
         const resetUrl = `${process.env.APP_URL || 'https://nestfinder-c6bm.onrender.com'}/reset-password.html?token=${token}`;
 
         await transporter.sendMail({
