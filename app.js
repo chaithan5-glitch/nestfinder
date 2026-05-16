@@ -219,7 +219,7 @@ async function initDetail() {
   if (!id || !el) return;
 
   try {
-    const res = await fetch(`http://localhost:5000/api/properties/${id}`);
+    const res = await fetch(`https://nestfinder-c6bm.onrender.com/api/properties/${id}`);
     const prop = await res.json();
 
     if (!prop || prop.error) {
@@ -357,7 +357,7 @@ async function initSaved() {
   try {
     // Fetch all saved properties from MongoDB
     const promises = savedIds.map(id =>
-      fetch(`http://localhost:5000/api/properties/${id}`)
+      fetch(`https://nestfinder-c6bm.onrender.com/api/properties/${id}`)
         .then(r => r.json())
         .catch(() => null)
     );
@@ -504,7 +504,7 @@ function initAddProperty() {
     try {
       showSpinner();
       const token = localStorage.getItem("nf_token");
-      const response = await fetch("http://localhost:5000/api/properties", {
+      const response = await fetch("https://nestfinder-c6bm.onrender.com/api/properties", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -696,7 +696,7 @@ async function handleSignin(e) {
   btn.innerHTML = '<span class="spinner" style="width:18px;height:18px;border-width:2px;margin:0"></span> Signing in…';
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/signin", {
+    const res = await fetch("https://nestfinder-c6bm.onrender.com/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password: pw })
@@ -752,7 +752,7 @@ async function handleSignup(e) {
   btn.innerHTML = '<span class="spinner" style="width:18px;height:18px;border-width:2px;margin:0"></span> Creating account…';
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/register", {
+    const res = await fetch("https://nestfinder-c6bm.onrender.com/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: `${first} ${last}`.trim(), email, password: pw })
@@ -804,7 +804,7 @@ async function handleForgot(e) {
   btn.innerHTML = '<span class="spinner" style="width:18px;height:18px;border-width:2px;margin:0"></span> Sending…';
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/forgot-password", {
+    const res = await fetch("https://nestfinder-c6bm.onrender.com/api/auth/forgot-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
@@ -872,7 +872,7 @@ window.onload = async function () {
   if (page === 'listings' || page === 'home' || page === 'search') {
     try {
       showSpinner();
-      const response = await fetch("http://localhost:5000/api/properties");
+      const response = await fetch("https://nestfinder-c6bm.onrender.com/api/properties");
       const dbProperties = await response.json();
       if (!Array.isArray(dbProperties)) {
         console.error("Backend error:", dbProperties);
