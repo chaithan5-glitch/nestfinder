@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
 const SECRET = process.env.JWT_SECRET || "nestfinder_secret_key";
+require('dotenv').config();
 
 // REGISTER
 router.post("/register", async (req, res) => {
