@@ -65,12 +65,12 @@ router.post("/signin", async (req, res) => {
 // FORGOT PASSWORD
 router.post("/forgot-password", async (req, res) => {
     try {
-        const { email } = req.body;
+        console.log("📧 Forgot password request received");
+        console.log("EMAIL_USER:", process.env.EMAIL_USER);
+        console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
 
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ error: "No account found with this email!" });
-        }
+        const { email } = req.body;
+        console.log("For email:", email);
 
         // Generate reset token
         const token = crypto.randomBytes(32).toString("hex");
