@@ -12,18 +12,14 @@ const SECRET = process.env.JWT_SECRET || "nestfinder_secret_key";
 router.post("/register", async (req, res) => {
     try {
         const { name, email, password } = req.body;
-
         const existing = await User.findOne({ email });
         if (existing) {
             return res.status(400).json({ error: "Email already registered!" });
         }
-
         const hashed = await bcrypt.hash(password, 10);
         const user = await User.create({ name, email, password: hashed });
         const token = jwt.sign({ id: user._id, name: user.name, email: user.email }, SECRET);
-
         res.json({ token, name: user.name, email: user.email });
-
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -33,20 +29,16 @@ router.post("/register", async (req, res) => {
 router.post("/signin", async (req, res) => {
     try {
         const { email, password } = req.body;
-
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ error: "No account found with this email!" });
         }
-
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
             return res.status(400).json({ error: "Incorrect password!" });
         }
-
         const token = jwt.sign({ id: user._id, name: user.name, email: user.email }, SECRET);
         res.json({ token, name: user.name, email: user.email });
-
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -56,8 +48,6 @@ router.post("/signin", async (req, res) => {
 router.post("/forgot-password", async (req, res) => {
     try {
         console.log("📧 Forgot password triggered");
-        console.log("EMAIL_USER:", process.env.EMAIL_USER);
-        console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
 
         const { email } = req.body;
         console.log("For email:", email);
@@ -74,23 +64,20 @@ router.post("/forgot-password", async (req, res) => {
         await user.save();
         console.log("✅ Token saved to user");
 
-        // Create transporter with explicit SMTP settings
+        const resetUrl = `${process.env.APP_URL || 'https://nestfinder-c6bm.onrender.com'}/reset-password.html?token=${token}`;
+
+        // Use callback instead of await — non-blocking
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS,
-            },
-            tls: {
-                rejectUnauthorized: false
             }
         });
 
-        const resetUrl = `${process.env.APP_URL || 'https://nestfinder-c6bm.onrender.com'}/reset-password.html?token=${token}`;
-
-        await transporter.sendMail({
+        transporter.sendMail({
             from: `"NestFinder" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: "Reset your NestFinder password",
@@ -111,13 +98,20 @@ router.post("/forgot-password", async (req, res) => {
                     </p>
                 </div>
             `
+        }, (err, info) => {
+            if (err) {
+                console.log("❌ Email error:", err.message);
+            } else {
+                console.log("✅ Email sent!", info.response);
+            }
         });
 
-        console.log("✅ Email sent successfully!");
+        // Respond immediately without waiting for email
+        console.log("📤 Reset link response sent to frontend");
         res.json({ message: "Reset link sent!" });
 
     } catch (err) {
-        console.log("❌ Email error:", err.message);
+        console.log("❌ Error:", err.message);
         res.status(500).json({ error: "Failed to send email: " + err.message });
     }
 });
@@ -126,24 +120,19 @@ router.post("/forgot-password", async (req, res) => {
 router.post("/reset-password", async (req, res) => {
     try {
         const { token, password } = req.body;
-
         const user = await User.findOne({
             resetToken: token,
             resetTokenExpires: { $gt: new Date() }
         });
-
         if (!user) {
             return res.status(400).json({ error: "Reset link expired or invalid!" });
         }
-
         const hashed = await bcrypt.hash(password, 10);
         user.password = hashed;
         user.resetToken = undefined;
         user.resetTokenExpires = undefined;
         await user.save();
-
         res.json({ message: "Password reset successfully!" });
-
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
