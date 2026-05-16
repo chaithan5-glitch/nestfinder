@@ -874,6 +874,11 @@ window.onload = async function () {
       showSpinner();
       const response = await fetch("http://localhost:5000/api/properties");
       const dbProperties = await response.json();
+      if (!Array.isArray(dbProperties)) {
+        console.error("Backend error:", dbProperties);
+        hideSpinner();
+        return;
+      }
       PROPERTIES.length = 0;
       dbProperties.forEach(p => PROPERTIES.push(p));
       hideSpinner();
